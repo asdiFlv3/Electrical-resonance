@@ -85,7 +85,7 @@ def plot_amplitude(data, R, guess, label, colour):
     delta_x=x_R[0]-x_L[-1]#x_R[0] nearest to x half height(which is smallest) on the right, vice versa
     Q_theo=(par[1]*L)/R
     Q_factor = x_peak/delta_x
-    #calculate the uncertainty of Q
+    #calculate the uncertainty of half height
     half_height_error=half_height*np.sqrt((x0_error/x_R[0])**2 + (x0_error/x_L[-1])**2)
     #propagate uncertainty to Q
     Q_factor_error=Q_factor * np.sqrt((x0_error/x_peak)**2 + (half_height_error/half_height)**2)
@@ -129,7 +129,7 @@ def plot_phase(x, R, colour, label):
     par, cvm = curve_fit(phase, x[4], x[5], p0=[R, L, C])
     fit_values = phase(x[4], *par)
     #find intersection at pi/2
-    x_intersection = fsolve(g, 364699, args=(par[0], par[1], par[2]))
+    x_intersection = fsolve(g, 360000, args=(par[0], par[1], par[2]))
     print(f'the intersection of the fitted curve with 1/2 pi is {x_intersection}')
     plt.plot(x[4], fit_values, color=colour[1], label=f'{label} Fit')
     
